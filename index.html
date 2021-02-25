@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Telemetry via Image</title>
+  </head>
+  <body>
+    <div id="root"></div>
+
+    <script>
+      const examples = [
+        {
+          img: "mtb",
+          process: "bike_31865",
+          action: "jump",
+        },
+        {
+          img: "hammock",
+          process: "lounge_84684",
+          action: "hang",
+        },
+        {
+          img: "campfire",
+          process: "camp_38105",
+          action: "light",
+        },
+      ];
+
+      var html = "";
+      for (let i = 0; i < examples.length; i++) {
+        const e = examples[i];
+        const url = `http://localhost:3000/?img=${e.img}&process=${
+          e.process
+        }&id=${Math.random()}&action=${e.action}`;
+        html += `
+        <p>${url}</p>
+        <img
+          style="width: 500px"
+          src="${url}"
+        />
+        <p>req.query ${JSON.stringify(e)}</p>
+        <hr />
+        `;
+      }
+
+      document.getElementById("root").innerHTML = html;
+    </script>
+  </body>
+</html>
